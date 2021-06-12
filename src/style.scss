@@ -1,0 +1,171 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+input:focus {
+  outline: none;
+}
+
+@mixin volume-slider-track () {
+  // Customs
+  width: 100%;
+  height: 0.25rem;
+  background: #999;
+  // Overwrites
+  cursor: pointer;
+  border: 0px solid #000000;
+  border-radius: 0px;
+  box-shadow: 0px 0px 0px #000000;
+}
+
+@mixin volume-slider-progress () {
+  // Customs
+  width: 100%;
+  height: 0.25rem;
+  background: #fff;
+  // Overwrites
+  cursor: pointer;
+  border: 0px solid #000000;
+  border-radius: 0px;
+  box-shadow: 0px 0px 0px #000000;
+}
+
+@mixin volume-slider-thumb () {
+  // Customs
+  height: 0.75rem;
+  width: 0.75rem;
+  margin-top: -0.25rem;
+  background: #fff;
+  border-radius: 10px;
+  // Overwrites
+  -webkit-appearance: none;
+  cursor: pointer;
+  border: 0px solid #000000;
+  box-shadow: 0px 0px 0px #000000;
+}
+
+@mixin volume-slider-thumb-hover () {
+  outline: 0.25rem solid rgba(255, 255, 255, 0.5);
+}
+
+@mixin track-slider-track () {
+  // Customs
+  width: 100%;
+  height: 0.25rem;
+  background: #999;
+  // Overwrites
+  cursor: pointer;
+  border: 0px solid #000000;
+  border-radius: 0px;
+  box-shadow: 0px 0px 0px #000000;
+}
+
+@mixin track-slider-progress () {
+  // Customs
+  width: 100%;
+  height: 0.25rem;
+  background: linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%);
+  // Overwrites
+  cursor: pointer;
+  border: 0px solid #000000;
+  border-radius: 0px;
+  box-shadow: 0px 0px 0px #000000;
+}
+
+@mixin track-slider-thumb () {
+  // Customs
+  height: 0.75rem;
+  width: 0.75rem;
+  margin-top: -0.25rem;
+  background: #fff;
+  border-radius: 10px;
+  opacity: 0;
+  // Overwrites
+  -webkit-appearance: none;
+  cursor: pointer;
+  border: 0px solid #000000;
+  box-shadow: 0px 0px 0px #000000;
+}
+
+@mixin track-slider-track-hover () {
+  height: 0.5rem;
+}
+
+@mixin track-slider-progress-hover () {
+  height: 0.5rem;
+}
+
+@mixin track-slider-thumb-hover () {
+  opacity: 1;
+}
+
+input[type=range].volume-slider {
+  // Customs
+  width: 5rem;
+  height: 1.125rem;
+  margin-top: 0.625rem;
+  margin-bottom: 0.625rem;
+  // Overwrites
+  -webkit-appearance: none;
+  background: transparent;
+  border-color: transparent;
+  color: transparent;
+
+  &::-webkit-slider-runnable-track  { @include volume-slider-track }
+  &::-moz-range-track               { @include volume-slider-track }
+  &::-ms-track                      { @include volume-slider-track }
+  &::-ms-fill-upper                 { @include volume-slider-track }
+
+  &::-moz-range-progress            { @include volume-slider-progress }
+  &::-ms-fill-lower                 { @include volume-slider-progress }
+
+  &::-webkit-slider-thumb           { @include volume-slider-thumb }
+  &::-moz-range-thumb               { @include volume-slider-thumb }
+  &::-ms-thumb                      { @include volume-slider-thumb }
+
+  &:hover {
+    &::-webkit-slider-thumb         { @include volume-slider-thumb-hover }
+    &::-moz-range-thumb             { @include volume-slider-thumb-hover }
+    &::-ms-thumb                    { @include volume-slider-thumb-hover }
+  }
+}
+
+input[type=range].track-slider {
+  // Customs
+  width: 100%;
+  height: 1.125rem;
+  margin-top: -0.625rem;
+  margin-bottom: 0.625rem;
+  position: absolute;
+  // Overwrites
+  -webkit-appearance: none;
+  background: transparent;
+  border-color: transparent;
+  color: transparent;
+
+  &::-webkit-slider-runnable-track    { @include track-slider-track }
+  &::-moz-range-track                 { @include track-slider-track }
+  &::-ms-track                        { @include track-slider-track }
+  &::-ms-fill-upper                   { @include track-slider-track }
+
+  &::-moz-range-progress              { @include track-slider-progress }
+  &::-ms-fill-lower                   { @include track-slider-progress }
+
+  &::-webkit-slider-thumb             { @include track-slider-thumb }
+  &::-moz-range-thumb                 { @include track-slider-thumb }
+  &::-ms-thumb                        { @include track-slider-thumb }
+
+  &:hover {
+    &::-webkit-slider-runnable-track  { @include track-slider-track-hover }
+    &::-moz-range-track               { @include track-slider-track-hover }
+    &::-ms-track                      { @include track-slider-track-hover }
+    &::-ms-fill-upper                 { @include track-slider-track-hover }
+
+    &::-moz-range-progress            { @include track-slider-progress-hover }
+    &::-ms-fill-lower                 { @include track-slider-progress-hover }
+
+    &::-webkit-slider-thumb           { @include track-slider-thumb-hover }
+    &::-moz-range-thumb               { @include track-slider-thumb-hover }
+    &::-ms-thumb                      { @include track-slider-thumb-hover }
+  }
+}
