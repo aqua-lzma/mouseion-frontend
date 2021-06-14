@@ -1,15 +1,9 @@
-import React from 'react'
-
-export default class extends React.Component {
-  stuff = new Array(100).fill().map((v, i) => {
-    return <p key={i}>hi{i}</p>
-  })
-
-  render () { return (
-    <div class="bg-green-500 py-12 md:py-20">
-      <div class="bg-pink-400 mx-2 sm:mx-4 md:mx-8 lg:mx-16 xl:mx-30 2xl:mx-40">
-        {this.stuff}
+export default function MainContent () {
+  return (
+    <div className="bg-main py-12 md:py-20 text-white min-h-screen">
+      <div className="mx-2 sm:mx-4 md:mx-8 lg:mx-16 xl:mx-30 2xl:mx-40 space-y-4">
+        {new Array(1000).fill().map((v, i) => <p key={i}>{i}</p>)}
       </div>
     </div>
-  ) }
+  )
 }
