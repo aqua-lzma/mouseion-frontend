@@ -22,5 +22,5 @@ jobs:
       - uses: EndBug/add-and-commit@v7
         with:
           message: 'Commit React build for ${{ github.event_name }}'
-          add: 'build/ --force'
+          add: 'docs/'
           branch: gh-pages
