@@ -31,25 +31,6 @@ function PlayIcon (props) {
 }
 
 export default function BottomPlayer (props) {
-  const cur = props.currentTime
-  let dur = props.duration
-  if (isNaN(dur)) dur = 0
-  const ch = String(Math.floor(cur / 3600))
-  let cm = String(Math.floor(cur / 60) % 60)
-  if (dur >= 600) cm = cm.padStart(2, 0)
-  const cs = String(Math.floor(cur) % 60).padStart(2, 0)
-  const dh = String(Math.floor(dur / 3600))
-  let dm = String(Math.floor(dur / 60) % 60)
-  if (dur >= 600) dm = dm.padStart(2, 0)
-  const ds = String(Math.floor(dur) % 60).padStart(2, 0)
-  let curStr = `${cm}:${cs}`
-  let durStr = `${dm}:${ds}`
-  if (dur >= 3600) {
-    curStr = `${ch}:` + curStr
-    durStr = `${dh}:` + durStr
-  }
-  const timeStat = `${curStr} / ${durStr}`
-
   function handleChangeVol (event) {
     const newVol = Number(event.target.value) / 1000
     props.handleChangeVol(newVol)
@@ -69,7 +50,7 @@ export default function BottomPlayer (props) {
         <div className='text-sm overflow-hidden'>
           <p className='truncate cursor-pointer hover:underline select-none'><b>{props.songName}</b></p>
           <p className='truncate select-none'><span className='cursor-pointer hover:underline'>{props.artistName}</span> • <span className='cursor-pointer hover:underline'>{props.albumName}</span></p>
-        </div><span className='whitespace-nowrap text-xs tracking-tighter hidden sm:block'>{timeStat}</span>
+        </div><span className='whitespace-nowrap text-xs tracking-tighter hidden sm:block'>{props.timeStat}</span>
         <span className='whitespace-nowrap text-xs tracking-tighter hidden sm:block'>{props.currentTime} / {props.duration}</span>
       </div>
       <div className='flex items-center justify-end lg:space-x-2'>

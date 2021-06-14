@@ -1,5 +1,4 @@
-import React from 'react'
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef, StrictMode } from 'react'
 import ReactDOM from 'react-dom'
 
 import './style.scss'
@@ -8,9 +7,32 @@ import Navbar from './navbar'
 import BottomPlayer from './bottom-player'
 import MainContent from './main-content'
 
-function Root2 () {
+function formatTime (currentTime, duration) {
+  if (isNaN(currentTime)) currentTime = 0
+  if (isNaN(duration)) duration = 0
+  const currentHours = String(Math.floor(currentTime / 3600))
+  const currentSeconds = String(Math.floor(currentTime) % 60).padStart(2, 0)
+  const durationHours = String(Math.floor(duration / 3600))
+  const durationSeconds = String(Math.floor(duration) % 60).padStart(2, 0)
+  let currentMinutes = String(Math.floor(currentTime / 60) % 60)
+  let durationMinutes = String(Math.floor(duration / 60) % 60)
+  if (duration >= 600) {
+    currentMinutes = currentMinutes.padStart(2, 0)
+    durationMinutes = durationMinutes.padStart(2, 0)
+  }
+  let curStr = `${currentMinutes}:${currentSeconds}`
+  let durStr = `${durationMinutes}:${durationSeconds}`
+  if (duration >= 3600) {
+    curStr = `${currentHours}:` + curStr
+    durStr = `${durationHours}:` + durStr
+  }
+  return `${curStr} / ${durStr}`
+}
+
+function Root () {
   const [currentTime, setCurrentTime] = useState(0)
   const [duration, setDuration] = useState(0)
+  const [timeStat, setTimeStat] = useState('')
   const [volume, setVolume] = useState(1)
   const [oldVolume, setOldVolume] = useState(1)
   const [repeat, setRepeat] = useState(0)
@@ -27,11 +49,10 @@ function Root2 () {
     audio.current.addEventListener('durationchange', () => {
       setDuration(audio.current.duration)
     })
+    setInterval(() => {
+      setTimeStat(formatTime(audio.current.currentTime, audio.current.duration))
+    }, 1000)
   }, [])
-
-  useEffect(() => {
-    console.log('Audio changed')
-  }, [audio.current])
 
   function changeVol (newVol) {
     audio.current.volume = newVol
@@ -76,6 +97,7 @@ function Root2 () {
         songName='Song Name'
         artistName='Artist Name'
         albumName='Album Name'
+        timeStat={timeStat}
         currentTime={currentTime}
         duration={duration}
         volume={volume}
@@ -95,8 +117,8 @@ function Root2 () {
 }
 
 ReactDOM.render(
-  <React.StrictMode>
-    <Root2/>
-  </React.StrictMode>,
+  <StrictMode>
+    <Root />
+  </StrictMode>,
   document.getElementById('root')
 )
