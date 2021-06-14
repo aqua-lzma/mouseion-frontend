@@ -20,5 +20,6 @@ jobs:
       - run: npm run build
       - uses: EndBug/add-and-commit@v7
         with:
-          message: 'Commit React build'
+          message: 'Commit React build for ${{ github.event_name }}'
           add: 'build/ --force'
+          branch: gh-pages
