@@ -18,3 +18,9 @@ jobs:
           node-version: ${{ matrix.node-version }}
       - run: npm i
       - run: npm run build
+      - run: mv build docs
+      - uses: EndBug/add-and-commit@v7
+        with:
+          message: 'Commit React build for ${{ github.event_name }}'
+          add: 'docs/'
+          branch: gh-pages
