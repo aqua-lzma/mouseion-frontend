@@ -2,6 +2,7 @@ import { useState, useEffect, useRef, StrictMode } from 'react'
 import ReactDOM from 'react-dom'
 
 import './style.scss'
+import './backgrounds.css'
 
 import Navbar from './navbar'
 import BottomPlayer from './bottom-player'
@@ -38,11 +39,12 @@ function Root () {
   const [repeat, setRepeat] = useState(0)
   const [shuffle, setShuffle] = useState(false)
   const [paused, setPaused] = useState(true)
-  const audio = useRef(null)
+  const audio = useRef()
 
   // Init event
   useEffect(() => {
-    audio.current.src = 'https://picardia.co/mouseion/songs/f3b7681372e8f95117aef9388590a3942f0bc64d.mp3'
+    // audio.current.src = 'https://picardia.co/mouseion/songs/f3b7681372e8f95117aef9388590a3942f0bc64d.mp3'
+    audio.current.src = 'https://picardia.co/mouseion/songs/74664af2529421f10bb2bf65237b10d2c3abb61c.mp3'
     audio.current.addEventListener('timeupdate', () => {
       setCurrentTime(audio.current.currentTime)
     })
@@ -50,7 +52,7 @@ function Root () {
       setDuration(audio.current.duration)
     })
     setInterval(() => {
-      setTimeStat(formatTime(audio.current.currentTime, audio.current.duration))
+      setTimeStat(formatTime(Math.round(audio.current.currentTime), audio.current.duration))
     }, 1000)
   }, [])
 

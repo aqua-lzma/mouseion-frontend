@@ -42,7 +42,7 @@ export default function BottomPlayer (props) {
   }
 
   return (
-    <div className='bg-gray-800 fixed inset-x-0 bottom-0 grid grid-cols-2 text-white'>
+    <div className='bg-gray-800 fixed inset-x-0 bottom-0 grid grid-cols-2'>
       {/* Main content */}
       <div className='flex items-center space-x-2 sm:mx-2 md:space-x-4'>
         {/* Album cover thumbnail, song name, artist name, album name, time stat */}
@@ -50,8 +50,7 @@ export default function BottomPlayer (props) {
         <div className='text-sm overflow-hidden'>
           <p className='truncate cursor-pointer hover:underline select-none'><b>{props.songName}</b></p>
           <p className='truncate select-none'><span className='cursor-pointer hover:underline'>{props.artistName}</span> • <span className='cursor-pointer hover:underline'>{props.albumName}</span></p>
-        </div><span className='whitespace-nowrap text-xs tracking-tighter hidden sm:block'>{props.timeStat}</span>
-        <span className='whitespace-nowrap text-xs tracking-tighter hidden sm:block'>{props.currentTime} / {props.duration}</span>
+        </div><span className='whitespace-nowrap text-xs font-mono tracking-tighter hidden sm:block'>{props.timeStat}</span>
       </div>
       <div className='flex items-center justify-end lg:space-x-2'>
         {/* Buttons */}
