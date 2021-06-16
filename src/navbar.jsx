@@ -7,7 +7,6 @@ export default function NavBar (props) {
   return (
     <div className='bg-nav fixed inset-x-0 top-0 px-2 lg:py-1 grid grid-cols-3 items-center'>
       <Link className='text-xl' to='/'>蒸気<span className='hidden sm:inline'><span className='text-gray-300'>の</span>博物館</span></Link>
-      <h1 className='hidden truncate text-xl'>господи как же хочется тян</h1>
       <div className='flex my-2'>
         <input
           className='appearance-none bg-transparent border rounded-l-sm border-white border-opacity-50 placeholder-white placeholder-opacity-70 px-1 lg:px-2 w-full'
