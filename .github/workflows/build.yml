@@ -19,8 +19,7 @@ jobs:
       - run: npm i
       - run: npm run build
       - run: mv build docs
-      - uses: EndBug/add-and-commit@v7
-        with:
-          message: 'Commit React build for ${{ github.event_name }}'
-          add: 'docs/*'
-          branch: gh-pages
+      - run: git add docs
+      - run: git commit -m 'React build ${{ github.event_name }}'
+      - run: git checkout gh-pages
+      - run: git push
