@@ -24,4 +24,4 @@ jobs:
       - run: git add docs
       - run: git commit -m 'React build $(git rev-parse --short "$GITHUB_SHA")'
       - run: git checkout -b gh-pages
-      - run: git push
+      - run: git push --set-upstream origin gh-pages
