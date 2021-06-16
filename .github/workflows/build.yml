@@ -23,5 +23,5 @@ jobs:
       - run: git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
       - run: git add docs
       - run: git commit -m 'React build $(git rev-parse --short "$GITHUB_SHA")'
-      - run: git checkout gh-pages
+      - run: git checkout -b gh-pages
       - run: git push
