@@ -6,17 +6,6 @@ input:focus {
   outline: none;
 }
 
-.thumbnail:hover {
-  @apply bg-gray-400;
-  & > img {
-    // filter: brightness(1.5);
-    @apply filter brightness-150;
-  }
-  & > p {
-    @apply text-gray-900
-  }
-}
-
 @mixin volume-slider-track () {
   // Customs
   width: 100%;

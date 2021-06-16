@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef, StrictMode } from 'react'
 import ReactDOM from 'react-dom'
+import { BrowserRouter } from 'react-router-dom'
 
 import './style.scss'
 import './backgrounds.css'
@@ -52,11 +53,12 @@ function Root () {
       setDuration(audio.current.duration)
     })
     setInterval(() => {
-      setTimeStat(formatTime(Math.round(audio.current.currentTime), audio.current.duration))
+      setTimeStat(formatTime(Math.round(audio.current.currentTime), Math.round(audio.current.duration)))
     }, 1000)
   }, [])
 
   function changeVol (newVol) {
+    console.log('Volume change', newVol)
     audio.current.volume = newVol
     setVolume(newVol)
     setOldVolume(newVol)
@@ -91,8 +93,9 @@ function Root () {
   }
 
   return (
-    <>
+    <BrowserRouter>
       <audio ref={audio} />
+      <MainContent />
       <Navbar />
       <BottomPlayer
         albumCover='https://picardia.co/static/papes/4b50dbaa-624e-11e7-b2fe-3a6e8f7c670f.jpg'
@@ -113,8 +116,7 @@ function Root () {
         handleTogglePause={togglePause}
         handleSeek={seek}
       />
-      <MainContent />
-    </>
+    </BrowserRouter>
   )
 }
 

@@ -32,12 +32,16 @@ function PlayIcon (props) {
 
 export default function BottomPlayer (props) {
   function handleChangeVol (event) {
-    const newVol = Number(event.target.value) / 1000
+    event.target.step = 'any'
+    // If your vol is maxxed, it's maxxed
+    // But if you're an autist like me who likes to have things quietly sometimes:
+    // This allows better fine tuning
+    const newVol = Number(event.target.value) ** 2
     props.handleChangeVol(newVol)
   }
 
   function handleSeek (event) {
-    const newSeek = Number(event.target.value) / 1000
+    const newSeek = Number(event.target.value)
     props.handleSeek(newSeek)
   }
 
@@ -57,8 +61,9 @@ export default function BottomPlayer (props) {
         {/* Volume slider */}
         <input
           className='volume-slider hidden sm:block'
-          type='range' min='0' max='1000' defaultValue={props.volume * 1000}
+          type='range' min='0' max='1' step='any'
           onChange={handleChangeVol}
+          onWheel={(event) => { event.target.step = 0.1 }}
         />
         {/* Volume button */}
         <div className='cursor-pointer p-1 md:p-2' onClick={props.handleToggleMute}>
@@ -106,8 +111,8 @@ export default function BottomPlayer (props) {
       {/* Seekbar */}
       <input
         className='w-full track-slider'
-        type='range' min='0' max='1000'
-        value={String(Math.floor((props.currentTime / props.duration) * 1000))}
+        type='range' min='0' max='1' step='any'
+        value={props.currentTime / props.duration}
         onChange={handleSeek}
       />
       {/* Album cover background */}
