@@ -20,9 +20,11 @@ jobs:
           node-version: ${{ matrix.node-version }}
       - run: npm i
       - run: npm run build
+      - run: git checkout gh-pages
+      - run: rm docs -rf
       - run: mv build docs
       - run: git config --global user.name "github-actions[bot]"
       - run: git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
       - run: git add docs
       - run: git commit -m 'React build $(git rev-parse --short "$GITHUB_SHA")'
-      - run: git push --set-upstream origin gh-pages
+      - run: git push
