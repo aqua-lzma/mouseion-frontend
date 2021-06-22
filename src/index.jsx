@@ -1,13 +1,20 @@
 import { useState, useEffect, useRef, StrictMode } from 'react'
 import ReactDOM from 'react-dom'
-import { BrowserRouter } from 'react-router-dom'
+import { BrowserRouter, Switch, Route } from 'react-router-dom'
 
 import './style.scss'
 import './backgrounds.css'
 
 import Navbar from './navbar'
+
+import Artists from './main-views/artists-page'
+import Artist from './main-views/artist-page'
+
 import BottomPlayer from './bottom-player'
-import MainContent from './main-content'
+
+function Home () {
+  return <h1>Home</h1>
+}
 
 function formatTime (currentTime, duration) {
   if (isNaN(currentTime)) currentTime = 0
@@ -58,7 +65,6 @@ function Root () {
   }, [])
 
   function changeVol (newVol) {
-    console.log('Volume change', newVol)
     audio.current.volume = newVol
     setVolume(newVol)
     setOldVolume(newVol)
@@ -94,12 +100,44 @@ function Root () {
 
   return (
     <BrowserRouter>
-      <audio ref={audio} />
-      <MainContent />
       <Navbar />
+      <audio ref={audio} />
+      <div className='bg-main py-16 lg:py-20 min-h-screen'>
+        <div className='mx-2 sm:mx-4 md:mx-8 lg:mx-16 xl:mx-30 2xl:mx-40 space-y-4'>
+          <Switch>
+            <Route exact path='/'>
+              <Home />
+            </Route>
+            <Route exact path='/labels'>
+              <Home />
+            </Route>
+            <Route exact path='/artists'>
+              <Artists />
+            </Route>
+            <Route exact path='/albums'>
+              <Home />
+            </Route>
+            <Route exact path='/songs'>
+              <Home />
+            </Route>
+            <Route exact path='/artist/:id'>
+              <Artist />
+            </Route>
+            <Route exact path='/album/:id'>
+              <Home />
+            </Route>
+            <Route exact path='/search'>
+              <Home />
+            </Route>
+            <Route exact path='/settings'>
+              <Home />
+            </Route>
+          </Switch>
+        </div>
+      </div>
       <BottomPlayer
         albumCover='https://picardia.co/static/papes/4b50dbaa-624e-11e7-b2fe-3a6e8f7c670f.jpg'
-        songName='Song Name'
+        songName='aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'
         artistName='Artist Name'
         albumName='Album Name'
         timeStat={timeStat}

@@ -1,3 +1,5 @@
+import { useRef } from 'react'
+
 function VolumeIcon (props) {
   let path
   if (props.volume === 0) {
@@ -31,13 +33,26 @@ function PlayIcon (props) {
 }
 
 export default function BottomPlayer (props) {
+  const volume = useRef()
+
   function handleChangeVol (event) {
-    event.target.step = 'any'
+    volume.current.step = 'any'
     // If your vol is maxxed, it's maxxed
     // But if you're an autist like me who likes to have things quietly sometimes:
     // This allows better fine tuning
-    const newVol = Number(event.target.value) ** 2
+    const newVol = Number(volume.current.value) ** 2
+    console.log(newVol)
     props.handleChangeVol(newVol)
+  }
+
+  function handleScrollVol (event) {
+    volume.current.step = 0.1
+    if (event.deltaY < 0) {
+      volume.current.stepUp(1)
+    } else {
+      volume.current.stepDown(1)
+    }
+    handleChangeVol(event)
   }
 
   function handleSeek (event) {
@@ -64,9 +79,14 @@ export default function BottomPlayer (props) {
           type='range' min='0' max='1' step='any'
           onChange={handleChangeVol}
           onWheel={(event) => { event.target.step = 0.1 }}
+          ref={volume}
         />
         {/* Volume button */}
-        <div className='cursor-pointer p-1 md:p-2' onClick={props.handleToggleMute}>
+        <div
+          className='cursor-pointer p-1 md:p-2'
+          onClick={props.handleToggleMute}
+          onWheel={handleScrollVol}
+        >
           <VolumeIcon volume={props.volume} />
         </div>
         {/* Repeat button */}
@@ -112,7 +132,7 @@ export default function BottomPlayer (props) {
       <input
         className='w-full track-slider'
         type='range' min='0' max='1' step='any'
-        value={props.currentTime / props.duration}
+        value={String(props.currentTime / props.duration)}
         onChange={handleSeek}
       />
       {/* Album cover background */}
